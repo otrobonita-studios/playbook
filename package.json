@@ -1,0 +1,29 @@
+{
+  "name": "@otrobonita/playbook",
+  "version": "1.0.0",
+  "description": "Installable governance, instructions, specifications, guardrails, and evaluation templates for AI-assisted engineering",
+  "main": "index.html",
+  "type": "module",
+  "bin": {
+    "engineering-playbook-mcp": "./mcp-server/index.js"
+  },
+  "scripts": {
+    "start": "npx -y serve docs",
+    "mcp": "node ./mcp-server/index.js",
+    "test:bootstrap:ps": "pwsh -NoProfile -File ./tests/bootstrap-smoke.ps1",
+    "test:bootstrap:bash": "bash ./tests/bootstrap-smoke.sh"
+  },
+  "keywords": [
+    "engineering-playbook",
+    "sdd",
+    "ai-governance",
+    "linting",
+    "testing"
+  ],
+  "author": "Otrobonita Studios",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "zod": "^4.4.3"
+  }
+}

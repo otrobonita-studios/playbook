@@ -1,0 +1,9 @@
+node_modules/
+.DS_Store
+*.log
+
+# Local environment files
+.env.local
+.env.*.local
+.env*
+.bootstrap-test/

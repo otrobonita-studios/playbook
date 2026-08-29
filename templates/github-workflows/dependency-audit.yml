@@ -1,0 +1,33 @@
+name: Dependency Audit
+on:
+  schedule:
+    - cron: '0 3 1 * *'  # 1st day of month at 03:00 UTC
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Run npm audit
+        run: npm audit --audit-level=moderate --json > audit-report.json
+
+      - name: Check for vulnerable packages
+        if: always()
+        run: test -f audit-report.json || npm audit --json > audit-report.json || true
+
+      - name: Upload audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: npm-audit-report
+          path: audit-report.json

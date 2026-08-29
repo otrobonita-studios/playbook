@@ -1,0 +1,133 @@
+# Otrobonita Engineering Playbook
+
+An installable starting point for safer AI-assisted engineering. It adds editable governance, guardrails, agent instructions, specification templates, session handover, and stack-appropriate dependency auditing to an existing project. Evaluation, infrastructure context, NemoClaw isolation guidance, and a local MCP server are optional modules.
+
+This repository does not make an AI system safe by itself. It provides an executable starting point that each team must adapt to its architecture, risks, commands, owners, and release process.
+
+## What gets installed
+
+Core installation:
+
+| Artifact | Purpose |
+|---|---|
+| `CONSTITUTION.md` | Editable project principles, boundaries, evidence, and accountability |
+| `AGENTS.md` | Agent workflow plus project-specific operating instructions |
+| `CLAUDE.md` | Claude-specific repository guidance |
+| `CONTINUE.md` | Temporary handover between sessions or context windows |
+| `governance/` | Guardrails, tool policy, approval matrix, and skills security policy |
+| `specs/template/` | Feature specification, technical plan, and task templates |
+| `.engineering-playbook/install.env` | Installed version, selected stack, and modules |
+
+For `web` and `node` stacks, a read-only monthly `npm audit` workflow is also installed. It reports evidence; it never applies fixes or pushes changes automatically.
+
+Optional modules:
+
+| Module | Installed artifact | Purpose |
+|---|---|---|
+| `evals` | `evals/template/evaluation.md` | Defines risks, cases, deterministic checks, LLM-judge calibration, thresholds, and release evidence |
+| `infrastructure` | `INFRASTRUCTURE.md` | Maps environments, services, secrets, deployment, ownership, and rollback |
+| `nemoclaw` | `NEMOCLAW.md` | Defines an isolation contract and verification checklist; it does not create a sandbox |
+| `mcp` | `.engineering-playbook/mcp-server/` | Installs a local MCP server exposing selected playbook artifacts |
+
+## Prerequisites
+
+- An extracted ZIP or Git clone of this repository.
+- An existing target directory. It must be a Git repository unless the explicit non-Git override is used.
+- Bash on macOS, Linux, or WSL; or PowerShell 7+ on Windows.
+- Node.js and npm only when selecting the `mcp` module.
+
+## Install with Bash
+
+```bash
+./setup.sh /absolute/path/to/project --stack generic
+
+./setup.sh /absolute/path/to/project \
+  --stack web \
+  --include evals,infrastructure,nemoclaw,mcp
+```
+
+## Install with PowerShell
+
+```powershell
+./setup.ps1 -TargetDir 'E:\development\my-project' -Stack generic
+
+./setup.ps1 `
+  -TargetDir 'E:\development\my-project' `
+  -Stack web `
+  -Include evals,infrastructure,nemoclaw,mcp
+```
+
+If script execution is disabled for the current PowerShell process:
+
+```powershell
+Set-ExecutionPolicy -Scope Process Bypass
+```
+
+## Existing files are protected
+
+The installer checks every destination before copying. If any destination exists, installation stops and lists all conflicts; nothing is partially replaced.
+
+After review, `--force` or `-Force` creates a timestamped backup under `.engineering-playbook-backup/` and replaces only installer-managed files. The installer never stages, commits, or pushes the target repository.
+
+## Verification and adoption
+
+Both installers verify that every selected artifact exists and is non-empty. MCP installation must also complete its dependency installation. Then:
+
+1. Inspect every added file with `git status --short`.
+2. Confirm stack and modules in `.engineering-playbook/install.env`.
+3. Replace the project-specific placeholders in `AGENTS.md`.
+4. Adapt the constitution, governance policies, specs, evals, and optional context documents.
+5. Confirm that tool permissions and approval boundaries match the real environment.
+6. For MCP, follow `.engineering-playbook/mcp-server/README.md` and call `get_constitution` from the client.
+7. Run the target project's formatter, linter, type checker, tests, build, security checks, and release verification.
+
+Installation is complete when the files are present. Adoption is complete only when they truthfully describe the project and its checks pass.
+
+## Command reference
+
+```text
+./setup.sh TARGET [--stack generic|web|node]
+                  [--include evals,infrastructure,nemoclaw,mcp]
+                  [--force]
+                  [--allow-non-git]
+
+./setup.ps1 -TargetDir PATH
+            [-Stack generic|web|node]
+            [-Include evals,infrastructure,nemoclaw,mcp]
+            [-Force]
+            [-AllowNonGit]
+```
+
+The non-Git override is intended for controlled generation and testing. A real project should initialize Git first so every installed change can be reviewed.
+
+## Repository structure
+
+```text
+playbook/
+├── AGENTS.md
+├── CONSTITUTION.md
+├── setup.sh
+├── setup.ps1
+├── docs/                 # Optional GitHub Pages site; safe to delete
+├── mcp-server/
+└── templates/
+    ├── ai-instructions/
+    ├── github-workflows/
+    ├── governance/
+    ├── optional/
+    └── sdd/
+```
+
+`docs/` is not used by the installers. It exists only to publish [playbook.otrobonita.com](https://playbook.otrobonita.com/) through GitHub Pages and may be deleted from a derived project.
+
+## Skills are executable dependencies
+
+A `SKILL.md` can influence an agent and may reference scripts, tools, networks, or additional instructions. Treat a skill like a code dependency: inspect the full package, verify its provenance and permissions, pin an accepted revision, test it with restricted access, and review updates before adoption. The installed `governance/SKILLS-POLICY.md` turns that approach into a project checklist and links to recognized starting sources.
+
+## Common foundation
+
+Our Engineering Playbook synthesizes public guidance from [OpenAI Codex](https://openai.com/index/introducing-codex/), [Anthropic Engineering](https://www.anthropic.com/engineering/claude-code-best-practices), [GitHub Copilot custom instructions](https://docs.github.com/en/copilot/tutorials/customize-code-review), [Google Engineering Practices](https://google.github.io/eng-practices/review/developer/small-cls.html), the [NIST Secure Software Development Framework](https://csrc.nist.gov/projects/ssdf), and [OWASP Secrets Management](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html).
+
+SpaceX does not publish a comparable public agent handbook. We use the production-representative verification principle documented in the [SpaceX Falcon User's Guide](https://www.spacex.com/media/falcon-users-guide-2025-05-09.pdf): test in conditions resembling operation, retain evidence, and document meaningful deviations.
+
+This is our maintained foundation, not a universal law. Technology and project risks change; installed material must change with them.
