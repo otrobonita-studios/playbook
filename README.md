@@ -118,7 +118,7 @@ playbook/
     └── sdd/
 ```
 
-`docs/` is not used by the installers. It exists only to publish [playbook.otrobonita.com](https://playbook.otrobonita.com/) through GitHub Pages and may be deleted from a derived project.
+`docs/` is not used by the installers. It exists only to publish [playbook.otrobonita.com](https://playbook.otrobonita.com/) through GitHub Pages. In a derived project, the directory can be safely deleted, retained as-is, or redesigned as the project's own documentation or landing page without affecting the installable playbook.
 
 ## Skills are executable dependencies
 
