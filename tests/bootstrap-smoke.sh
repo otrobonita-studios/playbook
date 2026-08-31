@@ -11,6 +11,7 @@ cleanup() {
 trap cleanup EXIT
 
 git -C "$TEST_DIR" init -q
+test -x "$REPO_DIR/setup.sh"
 "$REPO_DIR/setup.sh" "$TEST_DIR" --stack web --include evals,infrastructure,nemoclaw,mcp
 
 test -s "$TEST_DIR/AGENTS.md"
