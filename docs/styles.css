@@ -22,7 +22,7 @@ a { color:inherit; }
 .portal-button--primary { border-color:var(--text); background:var(--text); color:var(--bg); }
 .portal-button--primary:hover, .portal-button--primary:focus-visible { background:var(--accent); border-color:var(--accent); color:#fff; }
 .portal-button:focus-visible, .portal-toc a:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
-.portal__overview-link { display:inline-flex; align-items:center; gap:12px; margin-top:22px; color:#ff9443; font-family:var(--mono); font-size:15px; letter-spacing:.035em; line-height:1.45; text-underline-offset:4px; transition:color 180ms ease; }
+.portal__overview-link { display:inline-flex; align-items:center; gap:12px; margin-top:22px; color:#fff; font-family:var(--mono); font-size:15px; letter-spacing:.035em; line-height:1.45; text-underline-offset:4px; transition:color 180ms ease; }
 .portal__overview-link:hover, .portal__overview-link:focus-visible { color:var(--text); }
 .portal-toc { min-width:0; padding:clamp(62px,8vh,104px) clamp(30px,3vw,58px) 42px; border-left:1px solid var(--line); background-color:var(--deep); background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px); background-size:36px 36px; }
 .portal-toc__label { padding-bottom:28px; color:#8e8e89; }
