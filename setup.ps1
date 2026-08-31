@@ -2,7 +2,7 @@
 param(
     [Parameter(Mandatory, Position = 0)] [string]$TargetDir,
     [ValidateSet('generic', 'web', 'node')] [string]$Stack = 'generic',
-    [ValidateSet('evals', 'infrastructure', 'nemoclaw', 'mcp')] [string[]]$Include = @(),
+    [ValidateSet('evals', 'verification', 'infrastructure', 'nemoclaw', 'mcp')] [string[]]$Include = @(),
     [switch]$Force,
     [switch]$AllowNonGit
 )
@@ -30,6 +30,10 @@ $artifacts = [ordered]@{
 }
 if ($Stack -in @('web', 'node')) { $artifacts['templates/github-workflows/dependency-audit.yml'] = '.github/workflows/dependency-audit.yml' }
 if ($Include -contains 'evals') { $artifacts['templates/sdd/4-evaluation-plan.md'] = 'evals/template/evaluation.md' }
+if ($Include -contains 'verification') {
+    $artifacts['templates/optional/VERIFICATION.md'] = 'VERIFICATION.md'
+    $artifacts['templates/optional/CONCURRENT-AGENTS.md'] = 'governance/CONCURRENT-AGENTS.md'
+}
 if ($Include -contains 'infrastructure') { $artifacts['templates/optional/INFRASTRUCTURE.md'] = 'INFRASTRUCTURE.md' }
 if ($Include -contains 'nemoclaw') { $artifacts['templates/optional/NEMOCLAW.md'] = 'NEMOCLAW.md' }
 if ($Include -contains 'mcp') {

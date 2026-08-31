@@ -12,10 +12,12 @@ trap cleanup EXIT
 
 git -C "$TEST_DIR" init -q
 test -x "$REPO_DIR/setup.sh"
-"$REPO_DIR/setup.sh" "$TEST_DIR" --stack web --include evals,infrastructure,nemoclaw,mcp
+"$REPO_DIR/setup.sh" "$TEST_DIR" --stack web --include evals,verification,infrastructure,nemoclaw,mcp
 
 test -s "$TEST_DIR/AGENTS.md"
 test -s "$TEST_DIR/evals/template/evaluation.md"
+test -s "$TEST_DIR/VERIFICATION.md"
+test -s "$TEST_DIR/governance/CONCURRENT-AGENTS.md"
 test -s "$TEST_DIR/INFRASTRUCTURE.md"
 test -s "$TEST_DIR/NEMOCLAW.md"
 test -s "$TEST_DIR/.engineering-playbook/mcp-server/node_modules/@modelcontextprotocol/sdk/package.json"
@@ -33,7 +35,7 @@ fi
 grep -q "Installation stopped" "$TEST_DIR/conflict.log"
 
 printf 'original marker\n' > "$TEST_DIR/AGENTS.md"
-"$REPO_DIR/setup.sh" "$TEST_DIR" --stack web --include evals,infrastructure,nemoclaw,mcp --force
+"$REPO_DIR/setup.sh" "$TEST_DIR" --stack web --include evals,verification,infrastructure,nemoclaw,mcp --force
 backup_file="$(find "$TEST_DIR/.engineering-playbook-backup" -path '*/AGENTS.md' -type f | head -n 1)"
 grep -q "original marker" "$backup_file"
 

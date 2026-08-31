@@ -19,6 +19,8 @@ This file defines the common working rules for agents in this repository. Read i
 - Make the smallest coherent change that satisfies the assignment.
 - Separate unrelated work. Preserve user changes and untracked files that are outside scope.
 - Prefer simple, composable solutions over speculative abstractions or unnecessary dependencies.
+- When agents work concurrently, use separate branches or worktrees with explicit scope, dependencies, and checks. Do not allow overlapping writes to the same working tree.
+- Treat each worker's completion claim as context, not proof. Independently verify its diff and evidence, then re-run relevant checks against the integrated candidate.
 
 ## 4. Protect boundaries and data
 

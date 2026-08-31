@@ -1,8 +1,16 @@
 # Otrobonita Engineering Playbook
 
-An installable starting point for safer AI-assisted engineering. It adds editable governance, guardrails, agent instructions, specification templates, session handover, and stack-appropriate dependency auditing to an existing project. Evaluation, infrastructure context, NemoClaw isolation guidance, and a local MCP server are optional modules.
+An installable starting point for safer AI-assisted engineering. It adds editable governance, guardrails, agent instructions, specification templates, session handover, and stack-appropriate dependency auditing to an existing project. Evaluation, deterministic verification, concurrent-agent guidance, infrastructure context, NemoClaw isolation guidance, and a local MCP server are optional modules.
 
 This repository does not make an AI system safe by itself. It provides an executable starting point that each team must adapt to its architecture, risks, commands, owners, and release process.
+
+## Who this Playbook is for
+
+This Playbook is designed for individuals, small teams, and AI-native product teams that want a fast, practical way to introduce specification, deterministic verification, and essential security controls into a software repository.
+
+It is not an enterprise development framework, compliance program, or organization-wide rollout specification. Enterprises typically have established engineering standards, security programs, approval structures, and platform tooling that this Playbook should complement rather than replace.
+
+Our goal is not to prescribe how enterprises must operate. It is to provide a lightweight, adaptable starting point for teams that would otherwise begin without durable specifications, agent instructions, verification gates, or security boundaries. The baseline should be fast to adopt, inexpensive to operate, and useful before a team has dedicated platform, security, or verification-engineering functions.
 
 ## What gets installed
 
@@ -25,6 +33,7 @@ Optional modules:
 | Module | Installed artifact | Purpose |
 |---|---|---|
 | `evals` | `evals/template/evaluation.md` | Defines risks, cases, deterministic checks, LLM-judge calibration, thresholds, and release evidence |
+| `verification` | `VERIFICATION.md`, `governance/CONCURRENT-AGENTS.md` | Defines layered evidence, risk-based checks, isolated parallel work, and integration verification |
 | `infrastructure` | `INFRASTRUCTURE.md` | Maps environments, services, secrets, deployment, ownership, and rollback |
 | `nemoclaw` | `NEMOCLAW.md` | Defines an isolation contract and verification checklist; it does not create a sandbox |
 | `mcp` | `.engineering-playbook/mcp-server/` | Installs a local MCP server exposing selected playbook artifacts |
@@ -43,7 +52,7 @@ Optional modules:
 
 ./setup.sh /absolute/path/to/project \
   --stack web \
-  --include evals,infrastructure,nemoclaw,mcp
+  --include evals,verification,infrastructure,nemoclaw,mcp
 ```
 
 ## Install with PowerShell
@@ -54,7 +63,7 @@ Optional modules:
 ./setup.ps1 `
   -TargetDir 'E:\development\my-project' `
   -Stack web `
-  -Include evals,infrastructure,nemoclaw,mcp
+  -Include evals,verification,infrastructure,nemoclaw,mcp
 ```
 
 If script execution is disabled for the current PowerShell process:
@@ -77,9 +86,11 @@ Both installers verify that every selected artifact exists and is non-empty. MCP
 2. Confirm stack and modules in `.engineering-playbook/install.env`.
 3. Replace the project-specific placeholders in `AGENTS.md`.
 4. Adapt the constitution, governance policies, specs, evals, and optional context documents.
-5. Confirm that tool permissions and approval boundaries match the real environment.
-6. For MCP, follow `.engineering-playbook/mcp-server/README.md` and call `get_constitution` from the client.
-7. Run the target project's formatter, linter, type checker, tests, build, security checks, and release verification.
+5. If verification is selected, define fast, full, security, and release commands plus the evidence required for the project's real risks.
+6. If agents work concurrently, partition ownership across branches or worktrees and define integration verification before parallel work begins.
+7. Confirm that tool permissions and approval boundaries match the real environment.
+8. For MCP, follow `.engineering-playbook/mcp-server/README.md` and call `get_constitution` from the client.
+9. Run the target project's formatter, linter, type checker, tests, build, security checks, and release verification.
 
 Installation is complete when the files are present. Adoption is complete only when they truthfully describe the project and its checks pass.
 
@@ -87,18 +98,26 @@ Installation is complete when the files are present. Adoption is complete only w
 
 ```text
 ./setup.sh TARGET [--stack generic|web|node]
-                  [--include evals,infrastructure,nemoclaw,mcp]
+                  [--include evals,verification,infrastructure,nemoclaw,mcp]
                   [--force]
                   [--allow-non-git]
 
 ./setup.ps1 -TargetDir PATH
             [-Stack generic|web|node]
-            [-Include evals,infrastructure,nemoclaw,mcp]
+            [-Include evals,verification,infrastructure,nemoclaw,mcp]
             [-Force]
             [-AllowNonGit]
 ```
 
 The non-Git override is intended for controlled generation and testing. A real project should initialize Git first so every installed change can be reviewed.
+
+## Concurrent agents in one repository
+
+Multiple agents may work in the same repository, but they should not write concurrently to the same working tree. Give each independent task a branch or worktree, bounded file ownership, settled dependencies, exact checks, and an integration owner.
+
+Worker claims are not evidence. The orchestrator or reviewer executes the declared checks, inspects the diff, and preserves failures and retry context. After accepted contributions are combined, run the complete relevant verification suite again against the integrated candidate. A task that passes alone can still fail in combination.
+
+The optional verification module documents a harness-neutral pattern. [Ringer](https://github.com/NateBJones-Projects/ringer) is one example of isolated workers, manifest-defined tasks, executable checks, and attempt logs; it is not a required dependency.
 
 ## Repository structure
 

@@ -5,6 +5,11 @@ This document is the machine-readable starting point for the Otrobonita Engineer
 
 The Playbook is a starting point, not proof that a system is secure or production-ready. Adapt its instructions, controls, specifications, evaluations, ownership, and release process to the actual project.
 
+## Intended Audience
+This Playbook is designed for individuals, small teams, and AI-native product teams that need a fast, practical way to introduce durable specifications, deterministic verification, and essential security controls.
+
+It is not an enterprise development framework, compliance program, or organization-wide rollout specification. Established organizations should integrate useful parts into their existing engineering and governance systems rather than create a competing process.
+
 ## Canonical Sources
 - [Playbook overview](https://otrobonita.com/engineering-playbook): Rationale, engineering loop, and practical examples.
 - [Installable repository](https://github.com/otrobonita-studios/playbook): Maintained templates, installers, governance, and agent instructions.
@@ -80,6 +85,26 @@ Do not silently invent missing product decisions. Mark unresolved items as `OPEN
 
 If the destination is clear and the remaining decisions fit in one working session, complete the Spec Interview directly. If the effort spans many sessions and the route remains genuinely unclear, use a decision-mapping workflow such as [Wayfinder](https://github.com/mattpocock/skills/blob/main/docs/engineering/wayfinder.md), then collapse the resolved decisions back into the four specification artifacts before implementation.
 
+## Deterministic Verification
+- Define one fast command for use during implementation and one complete command for pre-merge verification.
+- Reuse established repository tools before adding alternatives.
+- Make failures reproducible, diagnostic, and non-zero.
+- Select deeper security, architecture, end-to-end, coverage, and mutation checks according to actual risk.
+- Do not allow an agent to waive failed checks or approve its own exception.
+- Run the relevant complete suite against the integrated candidate, not only isolated contributions.
+- [Verification contract template](https://github.com/otrobonita-studios/playbook/blob/main/templates/optional/VERIFICATION.md)
+
+## Concurrent Agents
+Multiple agents may work in the same repository, but they should not write concurrently to the same working tree.
+
+- Give each independent task a separate branch or worktree, bounded ownership, settled dependencies, exact checks, and explicit evidence.
+- Treat a worker's completion summary as context, not proof. Independently run its checks and inspect its diff.
+- Serialize overlapping files, shared generated artifacts, unresolved interfaces, and mutable external side effects.
+- After combining accepted contributions, run integration and repository-level verification again.
+- Preserve task, base revision, model or harness, permissions, attempts, raw results, exceptions, and resulting commit.
+- Tools such as [Ringer](https://github.com/NateBJones-Projects/ringer) demonstrate this pattern but are not required.
+- [Concurrent-agent guidance](https://github.com/otrobonita-studios/playbook/blob/main/templates/optional/CONCURRENT-AGENTS.md)
+
 ## Governance and Agent Context
 - [Project constitution](https://github.com/otrobonita-studios/playbook/blob/main/CONSTITUTION.md): Editable principles, boundaries, evidence, and accountability.
 - [Agent instructions](https://github.com/otrobonita-studios/playbook/tree/main/templates/ai-instructions): Repository workflow and session continuity templates.
@@ -92,6 +117,8 @@ If the destination is clear and the remaining decisions fit in one working sessi
 - [Bash installer](https://github.com/otrobonita-studios/playbook/blob/main/setup.sh)
 - [PowerShell installer](https://github.com/otrobonita-studios/playbook/blob/main/setup.ps1)
 - [Download repository as ZIP](https://github.com/otrobonita-studios/playbook/archive/refs/heads/main.zip)
+
+Include `verification` during installation to add `VERIFICATION.md` and `governance/CONCURRENT-AGENTS.md`.
 
 Installation is complete when selected files exist and pass installer verification. Adoption is complete only when those files truthfully describe the target project and the project's required checks pass.
 

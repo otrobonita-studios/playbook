@@ -14,13 +14,13 @@ Usage: ./setup.sh TARGET [options]
 
 Options:
   --stack NAME                 Record the project stack (default: generic).
-  --include LIST               Optional modules: evals,infrastructure,nemoclaw,mcp.
+  --include LIST               Optional modules: evals,verification,infrastructure,nemoclaw,mcp.
   --force                      Back up conflicting files, then replace them.
   --allow-non-git              Permit installation outside a Git repository.
   --help                       Show this help.
 
 Example:
-  ./setup.sh ../my-project --stack web --include evals,infrastructure,mcp
+  ./setup.sh ../my-project --stack web --include evals,verification,infrastructure,mcp
 EOF
 }
 
@@ -49,7 +49,7 @@ declare -a MODULES=()
 if [[ -n "$INCLUDE" ]]; then IFS=',' read -r -a MODULES <<< "$INCLUDE"; fi
 has_module() { local wanted="$1"; local item; for item in "${MODULES[@]}"; do [[ "$item" == "$wanted" ]] && return 0; done; return 1; }
 for module in "${MODULES[@]}"; do
-  case "$module" in evals|infrastructure|nemoclaw|mcp|'') ;; *) echo "Unknown module: $module" >&2; exit 2 ;; esac
+    case "$module" in evals|verification|infrastructure|nemoclaw|mcp|'') ;; *) echo "Unknown module: $module" >&2; exit 2 ;; esac
 done
 
 declare -a SOURCES=(
@@ -70,6 +70,10 @@ declare -a DESTINATIONS=(
 if [[ "$STACK" == "web" || "$STACK" == "node" ]]; then SOURCES+=("templates/github-workflows/dependency-audit.yml"); DESTINATIONS+=(".github/workflows/dependency-audit.yml"); fi
 
 if has_module evals; then SOURCES+=("templates/sdd/4-evaluation-plan.md"); DESTINATIONS+=("evals/template/evaluation.md"); fi
+if has_module verification; then
+  SOURCES+=("templates/optional/VERIFICATION.md" "templates/optional/CONCURRENT-AGENTS.md")
+  DESTINATIONS+=("VERIFICATION.md" "governance/CONCURRENT-AGENTS.md")
+fi
 if has_module infrastructure; then SOURCES+=("templates/optional/INFRASTRUCTURE.md"); DESTINATIONS+=("INFRASTRUCTURE.md"); fi
 if has_module nemoclaw; then SOURCES+=("templates/optional/NEMOCLAW.md"); DESTINATIONS+=("NEMOCLAW.md"); fi
 if has_module mcp; then

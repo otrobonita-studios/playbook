@@ -6,11 +6,13 @@ $TestDir = Join-Path $TempRoot ("engineering-playbook-powershell-{0}" -f [guid]:
 try {
     New-Item -ItemType Directory -Path $TestDir | Out-Null
     git -C $TestDir init -q
-    & (Join-Path $RepoDir 'setup.ps1') -TargetDir $TestDir -Stack web -Include evals,infrastructure,nemoclaw,mcp
+    & (Join-Path $RepoDir 'setup.ps1') -TargetDir $TestDir -Stack web -Include evals,verification,infrastructure,nemoclaw,mcp
 
     @(
         'AGENTS.md'
         'evals/template/evaluation.md'
+        'VERIFICATION.md'
+        'governance/CONCURRENT-AGENTS.md'
         'INFRASTRUCTURE.md'
         'NEMOCLAW.md'
         '.engineering-playbook/mcp-server/node_modules/@modelcontextprotocol/sdk/package.json'
@@ -31,7 +33,7 @@ try {
     if (-not $conflictStopped) { throw 'Expected the second installation to stop on conflicts.' }
 
     'original marker' | Set-Content -LiteralPath (Join-Path $TestDir 'AGENTS.md')
-    & (Join-Path $RepoDir 'setup.ps1') -TargetDir $TestDir -Stack web -Include evals,infrastructure,nemoclaw,mcp -Force
+    & (Join-Path $RepoDir 'setup.ps1') -TargetDir $TestDir -Stack web -Include evals,verification,infrastructure,nemoclaw,mcp -Force
     $backup = Get-ChildItem -LiteralPath (Join-Path $TestDir '.engineering-playbook-backup') -Recurse -Filter AGENTS.md | Select-Object -First 1
     if (-not $backup -or (Get-Content -Raw -LiteralPath $backup.FullName) -notmatch 'original marker') {
         throw 'The force installation did not preserve the conflicting AGENTS.md in its backup.'
