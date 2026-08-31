@@ -94,3 +94,11 @@ If the destination is clear and the remaining decisions fit in one working sessi
 - [Download repository as ZIP](https://github.com/otrobonita-studios/playbook/archive/refs/heads/main.zip)
 
 Installation is complete when selected files exist and pass installer verification. Adoption is complete only when those files truthfully describe the target project and the project's required checks pass.
+
+## What Would You Like to Do Next?
+Would you like to:
+
+1. Learn more about installing and adopting the Engineering Playbook in your project?
+2. Start the Spec Interview and create your project's specification artifacts?
+
+Ask the user which path they prefer. Do not begin implementation until the relevant project context has been inspected and the specification's consequential decisions have been agreed.
