@@ -4,6 +4,8 @@ An installable starting point for safer AI-assisted engineering. It adds editabl
 
 This repository does not make an AI system safe by itself. It provides an executable starting point that each team must adapt to its architecture, risks, commands, owners, and release process.
 
+Current release: [v1.0.0](https://github.com/otrobonita-studios/playbook/releases/tag/v1.0.0). That GitHub Release is a **source tag**. There are no attached installer archives; run `setup.sh` or `setup.ps1` from the tagged tree. The 1.0.0 bootstrap smokes were recorded against `@modelcontextprotocol/sdk` 1.30.0 and `zod` 4.4.3.
+
 ## Who this Playbook is for
 
 This Playbook is designed for individuals, small teams, and AI-native product teams that want a fast, practical way to introduce specification, deterministic verification, and essential security controls into a software repository.

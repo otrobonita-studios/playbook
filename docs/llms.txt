@@ -15,6 +15,7 @@ It is not an enterprise development framework, compliance program, or organizati
 - [Installable repository](https://github.com/otrobonita-studios/playbook): Maintained templates, installers, governance, and agent instructions.
 - [Repository README](https://github.com/otrobonita-studios/playbook/blob/main/README.md): Installation, modules, commands, and adoption guidance.
 - [GitHub Pages portal](https://playbook.otrobonita.com): Direct access to the installable foundation.
+- [Current release v1.0.0](https://github.com/otrobonita-studios/playbook/releases/tag/v1.0.0): Source tag. Install from the tagged tree; no separate installer archives.
 
 ## Give This to Your Agent
 Use the following procedure when adopting the Playbook in a project:

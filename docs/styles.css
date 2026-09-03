@@ -11,6 +11,9 @@ a { color:inherit; }
 .portal__copy h1 span { color:#aeadad; }
 .portal__introduction { max-width:1250px; padding-top:clamp(60px,10vh,128px); }
 .portal__lead { max-width:1210px; margin:0; font-size:clamp(22px,1.72vw,34px); font-weight:400; letter-spacing:-.025em; line-height:1.42; }
+.portal__version { max-width:920px; margin:16px 0 0; color:var(--muted); font-family:var(--mono); font-size:clamp(13px,.9vw,16px); letter-spacing:.04em; line-height:1.5; }
+.portal__version a { color:#ff9443; text-underline-offset:4px; }
+.portal__version a:hover, .portal__version a:focus-visible { color:var(--text); }
 .portal__support { max-width:920px; margin:20px 0 0; color:var(--muted); font-size:clamp(16px,1.02vw,20px); line-height:1.55; }
 .portal__agent-start { display:flex; max-width:920px; flex-direction:column; align-items:flex-start; gap:6px; margin-top:24px; font-family:var(--mono); font-size:clamp(13px,.9vw,16px); line-height:1.5; }
 .portal__agent-start span { color:var(--muted); }
