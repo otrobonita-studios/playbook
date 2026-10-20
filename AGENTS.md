@@ -2,15 +2,19 @@
 
 This file defines the common working rules for agents in this repository. Read it before acting. More specific `AGENTS.md` files deeper in the repository may add or override instructions for their directory.
 
+This is the single, tool-agnostic source of agent instructions. Do not add tool-specific copies such as `CLAUDE.md`; if a tool cannot read `AGENTS.md`, give it a one-line pointer to this file instead of duplicated rules.
+
 ## 1. Understand the assignment
 
 - Restate the objective, constraints, and definition of done before changing code.
 - Resolve material ambiguity from repository evidence first. Ask when a missing decision would substantially change the result.
+- State assumptions explicitly. When several interpretations are plausible, name them instead of choosing silently, and say so when a simpler approach exists.
 - Follow the working loop: explore, plan, implement, verify, then commit.
 
 ## 2. Inspect before editing
 
-- Read the relevant code, tests, specifications, architecture records, and local instructions.
+- Read the relevant code, tests, specifications, architecture records, and local instructions. Check `specs/` for an existing specification before coding.
+- For multi-step work, plan each step with the check that will verify it, and track progress in the feature's `specs/<feature>/3-tasks.md` using `[ ]`, `[/]`, and `[x]`.
 - Search for existing patterns and reuse them unless there is evidence they are unsuitable.
 - Do not infer current behavior from filenames, documentation, or assumptions alone.
 
@@ -19,6 +23,8 @@ This file defines the common working rules for agents in this repository. Read i
 - Make the smallest coherent change that satisfies the assignment.
 - Separate unrelated work. Preserve user changes and untracked files that are outside scope.
 - Prefer simple, composable solutions over speculative abstractions or unnecessary dependencies.
+- Match existing style and conventions. Do not reformat or "improve" unrelated code.
+- Remove imports, variables, and functions that your change made unused. Mention pre-existing dead code instead of deleting it.
 - When agents work concurrently, use separate branches or worktrees with explicit scope, dependencies, and checks. Do not allow overlapping writes to the same working tree.
 - Treat each worker's completion claim as context, not proof. Independently verify its diff and evidence, then re-run relevant checks against the integrated candidate.
 

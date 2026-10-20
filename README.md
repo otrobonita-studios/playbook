@@ -22,7 +22,6 @@ Core installation:
 |---|---|
 | `CONSTITUTION.md` | Editable project principles, boundaries, evidence, and accountability |
 | `AGENTS.md` | Agent workflow plus project-specific operating instructions |
-| `CLAUDE.md` | Claude-specific repository guidance |
 | `CONTINUE.md` | Temporary handover between sessions or context windows |
 | `governance/` | Guardrails, tool policy, approval matrix, and skills security policy |
 | `specs/template/` | Feature specification, technical plan, and task templates |

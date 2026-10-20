@@ -53,15 +53,15 @@ for module in "${MODULES[@]}"; do
 done
 
 declare -a SOURCES=(
-  "templates/ai-instructions/AGENTS.md" "templates/ai-instructions/CLAUDE.md"
-  "templates/ai-instructions/CONTINUE.md" "CONSTITUTION.md"
+  "templates/ai-instructions/AGENTS.md" "templates/ai-instructions/CONTINUE.md"
+  "CONSTITUTION.md"
   "templates/governance/GUARDRAILS.md" "templates/governance/TOOL-POLICY.md"
   "templates/governance/APPROVAL-MATRIX.md" "templates/governance/SKILLS-POLICY.md"
   "templates/sdd/1-spec-template.md" "templates/sdd/2-tech-plan-template.md"
   "templates/sdd/3-tasks-template.md"
 )
 declare -a DESTINATIONS=(
-  "AGENTS.md" "CLAUDE.md" "CONTINUE.md" "CONSTITUTION.md"
+  "AGENTS.md" "CONTINUE.md" "CONSTITUTION.md"
   "governance/GUARDRAILS.md" "governance/TOOL-POLICY.md"
   "governance/APPROVAL-MATRIX.md" "governance/SKILLS-POLICY.md"
   "specs/template/1-spec.md" "specs/template/2-technical-plan.md" "specs/template/3-tasks.md"

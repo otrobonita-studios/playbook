@@ -17,7 +17,6 @@ if (-not $AllowNonGit -and -not (Test-Path -LiteralPath (Join-Path $TargetDir '.
 
 $artifacts = [ordered]@{
     'templates/ai-instructions/AGENTS.md' = 'AGENTS.md'
-    'templates/ai-instructions/CLAUDE.md' = 'CLAUDE.md'
     'templates/ai-instructions/CONTINUE.md' = 'CONTINUE.md'
     'CONSTITUTION.md' = 'CONSTITUTION.md'
     'templates/governance/GUARDRAILS.md' = 'governance/GUARDRAILS.md'
