@@ -1,6 +1,6 @@
 {
   "name": "@otrobonita/playbook",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Installable governance, instructions, specifications, guardrails, and evaluation templates for AI-assisted engineering",
   "main": "index.html",
   "type": "module",

@@ -20,7 +20,7 @@ const rootDir = process.env.ENGINEERING_PLAYBOOK_ROOT
 const server = new Server(
   {
     name: 'otrobonita-playbook-mcp',
-    version: '1.0.0',
+    version: '1.1.0',
   },
   {
     capabilities: {

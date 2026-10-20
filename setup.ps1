@@ -68,7 +68,7 @@ foreach ($entry in $artifacts.GetEnumerator()) {
 
 $stateDir = Join-Path $TargetDir '.engineering-playbook'
 New-Item -ItemType Directory -Force -Path $stateDir | Out-Null
-@('PLAYBOOK_VERSION=1.0.0', "STACK=$Stack", "MODULES=$(if ($Include.Count) { $Include -join ',' } else { 'core' })") |
+@('PLAYBOOK_VERSION=1.1.0', "STACK=$Stack", "MODULES=$(if ($Include.Count) { $Include -join ',' } else { 'core' })") |
     Set-Content -LiteralPath (Join-Path $stateDir 'install.env') -Encoding utf8NoBOM
 
 if ($Include -contains 'mcp') {
@@ -83,7 +83,7 @@ foreach ($relative in $artifacts.Values) {
 }
 
 Write-Host ''
-Write-Host 'Engineering Playbook 1.0.0 installed and verified.'
+Write-Host 'Engineering Playbook 1.1.0 installed and verified.'
 Write-Host "Target: $TargetDir"
 Write-Host "Stack: $Stack"
 Write-Host "Modules: $(if ($Include.Count) { $Include -join ',' } else { 'core' })"

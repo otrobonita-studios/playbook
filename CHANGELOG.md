@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.1.0 — 2026-10-20
 
 - Removed the `CLAUDE.md` template. `AGENTS.md` is now the single, tool-agnostic instruction file; its useful guidance (explicit assumptions, spec-first task tracking, style matching, orphan cleanup) moved into `AGENTS.md`.
 
