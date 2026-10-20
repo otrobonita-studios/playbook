@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Removed the `CLAUDE.md` template. `AGENTS.md` is now the single, tool-agnostic instruction file; its useful guidance (explicit assumptions, spec-first task tracking, style matching, orphan cleanup) moved into `AGENTS.md`.
+
 ## 1.0.0 — 2026-08-29
 
 - Added equivalent Bash and PowerShell installers.
