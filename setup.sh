@@ -110,7 +110,7 @@ done
 
 mkdir -p "$TARGET_DIR/.engineering-playbook"
 cat > "$TARGET_DIR/.engineering-playbook/install.env" <<EOF
-PLAYBOOK_VERSION=1.0.0
+PLAYBOOK_VERSION=1.1.0
 STACK=$STACK
 MODULES=${INCLUDE:-core}
 EOF
@@ -134,7 +134,7 @@ done
 [[ $missing -eq 0 ]] || exit 1
 
 echo ""
-echo "Engineering Playbook 1.0.0 installed and verified."
+echo "Engineering Playbook 1.1.0 installed and verified."
 echo "Target: $TARGET_DIR"
 echo "Stack: $STACK"
 echo "Modules: ${INCLUDE:-core}"
